@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(GroceryShoppingList)
 
-enable_testing()
-
+include(CTest)
 include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -23,6 +22,9 @@ FetchContent_Declare(
     GIT_TAG v3.12.0
 )
 FetchContent_MakeAvailable(json Catch2)
+
+list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+include(Catch)
 
 add_executable(grocery-shopping-list
     src/app/App.cpp
@@ -59,7 +61,4 @@ target_link_libraries(grocery-shopping-list-tests PRIVATE
     nlohmann_json::nlohmann_json
 )
 
-list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
-include(CTest)
-include(Catch)
 catch_discover_tests(grocery-shopping-list-tests)
