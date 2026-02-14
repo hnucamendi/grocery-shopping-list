@@ -2,6 +2,7 @@
 build/
 
 data/lists/*.json
+.cache
 
 # Editor/OS clutter
 .DS_Store
