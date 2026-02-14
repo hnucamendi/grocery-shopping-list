@@ -50,15 +50,26 @@ target_link_libraries(grocery-shopping-list PRIVATE
 
 add_executable(grocery-shopping-list-tests
     tests/domain/Placeholder_test.cpp
+    src/ui/MainFrame.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
-target_include_directories(grocery-shopping-list-tests PRIVATE src)
+target_include_directories(grocery-shopping-list-tests PRIVATE
+    src
+    ${wxWidgets_INCLUDE_DIRS}
+)
+target_compile_definitions(grocery-shopping-list-tests PRIVATE
+    ${wxWidgets_DEFINITIONS}
+)
 target_link_libraries(grocery-shopping-list-tests PRIVATE
+    ${wxWidgets_LIBRARIES}
     Catch2::Catch2WithMain
     nlohmann_json::nlohmann_json
 )
 
-catch_discover_tests(grocery-shopping-list-tests)
+catch_discover_tests(grocery-shopping-list-tests
+    PROPERTIES
+    DISCOVERY_MODE PRE_TEST
+)
