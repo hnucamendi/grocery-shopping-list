@@ -2,13 +2,17 @@ cmake_minimum_required(VERSION 3.16)
 
 project(GroceryShoppingList)
 
+enable_testing()
+
 include(FetchContent)
 
-set_property(GLOBAL PROPERTY CMAKE_CXX_STANDARD C++17)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_compile_options(-Wall -Wextra)
 
 find_package(wxWidgets REQUIRED COMPONENTS core base)
+include(${wxWidgets_USE_FILE})
 
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
 FetchContent_Declare(catch GIT_REPOSITORY https://github.com/catchorg/Catch2.git GIT_TAG 88abf9bf325c798c33f54f6b9220ef885b267f4f)
@@ -18,6 +22,7 @@ add_executable(grocery-shopping-list
     src/app/App.cpp
     src/ui/MainFrame.cpp
 )
+target_compile_options(grocery-shopping-list PRIVATE -Wall -Wextra)
 target_include_directories(grocery-shopping-list PRIVATE src)
 target_link_libraries(grocery-shopping-list PRIVATE
     ${wxWidgets_LIBRARIES}
@@ -32,3 +37,7 @@ target_link_libraries(grocery-shopping-list-tests PRIVATE
     Catch2::Catch2WithMain
     nlohmann_json::nlohmann_json
 )
+
+include(CTest)
+include(Catch)
+catch_discover_tests(grocery-shopping-list-tests)
