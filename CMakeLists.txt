@@ -50,6 +50,7 @@ target_link_libraries(grocery-shopping-list PRIVATE
 
 add_executable(grocery-shopping-list-tests
     tests/domain/Placeholder_test.cpp
+    tests/ui/MainFrame_test.cpp
     src/ui/MainFrame.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
