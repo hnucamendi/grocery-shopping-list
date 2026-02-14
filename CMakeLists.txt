@@ -12,7 +12,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 find_package(wxWidgets REQUIRED COMPONENTS core base)
-include(${wxWidgets_USE_FILE})
 
 FetchContent_Declare(
     json
@@ -30,7 +29,13 @@ add_executable(grocery-shopping-list
     src/ui/MainFrame.cpp
 )
 target_compile_options(grocery-shopping-list PRIVATE -Wall -Wextra)
-target_include_directories(grocery-shopping-list PRIVATE src)
+target_include_directories(grocery-shopping-list PRIVATE
+    src
+    ${wxWidgets_INCLUDE_DIRS}
+)
+target_compile_definitions(grocery-shopping-list PRIVATE
+    ${wxWidgets_DEFINITIONS}
+)
 target_link_libraries(grocery-shopping-list PRIVATE
     ${wxWidgets_LIBRARIES}
     nlohmann_json::nlohmann_json
