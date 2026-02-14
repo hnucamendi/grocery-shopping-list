@@ -71,6 +71,5 @@ target_link_libraries(grocery-shopping-list-tests PRIVATE
 )
 
 catch_discover_tests(grocery-shopping-list-tests
-    PROPERTIES
     DISCOVERY_MODE PRE_TEST
 )
