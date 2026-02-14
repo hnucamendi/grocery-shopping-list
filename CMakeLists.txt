@@ -21,7 +21,7 @@ FetchContent_Declare(
 FetchContent_Declare(
     catch
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG 3.12.0
+    GIT_TAG v3.12.0
 )
 FetchContent_MakeAvailable(json catch)
 
@@ -39,6 +39,7 @@ target_link_libraries(grocery-shopping-list PRIVATE
 add_executable(grocery-shopping-list-tests
     tests/domain/Placeholder_test.cpp
 )
+target_compile_options(grocery-shopping-list-tests PRIVATE -Wall -Wextra)
 target_include_directories(grocery-shopping-list-tests PRIVATE src)
 target_link_libraries(grocery-shopping-list-tests PRIVATE
     Catch2::Catch2WithMain
