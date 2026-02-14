@@ -18,18 +18,20 @@ FetchContent_Declare(
     URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
 )
 FetchContent_Declare(
-    catch
+    Catch2
     GIT_REPOSITORY https://github.com/catchorg/Catch2.git
     GIT_TAG v3.12.0
 )
-FetchContent_MakeAvailable(json catch)
+FetchContent_MakeAvailable(json Catch2)
 
 add_executable(grocery-shopping-list
     src/app/App.cpp
+    src/app/App.h
     src/ui/MainFrame.cpp
+    src/ui/MainFrame.h
 )
 target_compile_options(grocery-shopping-list PRIVATE
-    $<$<CXX_COMPLIER_ID:GNU,Clang,AppleClang>: -Wall -Wextra>
+    $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
 target_include_directories(grocery-shopping-list PRIVATE
@@ -48,7 +50,7 @@ add_executable(grocery-shopping-list-tests
     tests/domain/Placeholder_test.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
-    $<$<CXX_COMPLIER_ID:GNU,Clang,AppleClang>: -Wall -Wextra>
+    $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
 target_include_directories(grocery-shopping-list-tests PRIVATE src)
@@ -57,6 +59,7 @@ target_link_libraries(grocery-shopping-list-tests PRIVATE
     nlohmann_json::nlohmann_json
 )
 
+list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
 include(CTest)
 include(Catch)
 catch_discover_tests(grocery-shopping-list-tests)
