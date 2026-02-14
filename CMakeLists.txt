@@ -14,8 +14,15 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(wxWidgets REQUIRED COMPONENTS core base)
 include(${wxWidgets_USE_FILE})
 
-FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz)
-FetchContent_Declare(catch GIT_REPOSITORY https://github.com/catchorg/Catch2.git GIT_TAG 88abf9bf325c798c33f54f6b9220ef885b267f4f)
+FetchContent_Declare(
+    json
+    URL https://github.com/nlohmann/json/releases/download/v3.12.0/json.tar.xz
+)
+FetchContent_Declare(
+    catch
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG 3.12.0
+)
 FetchContent_MakeAvailable(json catch)
 
 add_executable(grocery-shopping-list
