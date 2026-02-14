@@ -1,28 +1,7 @@
 # Build directories
-/build/
-/out/
-/dist/
+build/
 
-# CMake artifacts
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-install_manifest.txt
-
-# Tooling helpers
-compile_commands.json
-.cache/
-
-# Executables and logs
-hello
-*.log
+data/lists/*.json
 
 # Editor/OS clutter
 .DS_Store
-.vscode/
-.idea/
-*.code-workspace
-
-# Swap files
-*.swp
-*.tmp
