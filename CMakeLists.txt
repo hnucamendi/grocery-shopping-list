@@ -28,7 +28,10 @@ add_executable(grocery-shopping-list
     src/app/App.cpp
     src/ui/MainFrame.cpp
 )
-target_compile_options(grocery-shopping-list PRIVATE -Wall -Wextra)
+target_compile_options(grocery-shopping-list PRIVATE
+    $<$<CXX_COMPLIER_ID:GNU,Clang,AppleClang>: -Wall -Wextra>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4>
+)
 target_include_directories(grocery-shopping-list PRIVATE
     src
     ${wxWidgets_INCLUDE_DIRS}
@@ -44,7 +47,10 @@ target_link_libraries(grocery-shopping-list PRIVATE
 add_executable(grocery-shopping-list-tests
     tests/domain/Placeholder_test.cpp
 )
-target_compile_options(grocery-shopping-list-tests PRIVATE -Wall -Wextra)
+target_compile_options(grocery-shopping-list-tests PRIVATE
+    $<$<CXX_COMPLIER_ID:GNU,Clang,AppleClang>: -Wall -Wextra>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4>
+)
 target_include_directories(grocery-shopping-list-tests PRIVATE src)
 target_link_libraries(grocery-shopping-list-tests PRIVATE
     Catch2::Catch2WithMain
