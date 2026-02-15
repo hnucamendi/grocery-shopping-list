@@ -9,9 +9,10 @@ std::string normalizePascal(const std::string &s) {
     return s;
   }
   std::string result;
-  result += std::toupper(s[0]);
-  for (char c : s.substr(1)) {
-    result += std::tolower(c);
+  result.reserve(s.size());
+  result += std::toupper(static_cast<unsigned char>(s[0]));
+  for (std::string::size_type i = 1; i < s.size(); i++) {
+    result += std::tolower(static_cast<unsigned char>(s[i]));
   }
   return result;
 }

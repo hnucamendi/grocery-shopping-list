@@ -65,12 +65,33 @@ TEST_CASE("StoreSection fromString conversion") {
 
     std::vector<TestFields> fields = {
         {"Produce", StoreSection::Produce},
+        {"produce", StoreSection::Produce},
+        {"PRODUCE", StoreSection::Produce},
+        {"prOdUcE", StoreSection::Produce},
         {"Bakery", StoreSection::Bakery},
+        {"bakery", StoreSection::Bakery},
+        {"BAKERY", StoreSection::Bakery},
+        {"baKeRy", StoreSection::Bakery},
         {"Frozen", StoreSection::Frozen},
+        {"frozen", StoreSection::Frozen},
+        {"FROZEN", StoreSection::Frozen},
+        {"frOzEn", StoreSection::Frozen},
         {"Dairy", StoreSection::Dairy},
+        {"dairy", StoreSection::Dairy},
+        {"DAIRY", StoreSection::Dairy},
+        {"DaIrY", StoreSection::Dairy},
         {"Household", StoreSection::Household},
+        {"household", StoreSection::Household},
+        {"HOUSEHOLD", StoreSection::Household},
+        {"hoUsEhOlD", StoreSection::Household},
         {"Meat", StoreSection::Meat},
+        {"meat", StoreSection::Meat},
+        {"MEAT", StoreSection::Meat},
+        {"mEaT", StoreSection::Meat},
         {"Pantry", StoreSection::Pantry},
+        {"pantry", StoreSection::Pantry},
+        {"PANTRY", StoreSection::Pantry},
+        {"pAnTrY", StoreSection::Pantry},
     };
 
     for (TestFields &f : fields) {
