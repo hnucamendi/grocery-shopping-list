@@ -52,9 +52,10 @@ target_link_libraries(grocery-shopping-list PRIVATE
 )
 
 add_executable(grocery-shopping-list-tests
-    tests/domain/Placeholder_test.cpp
+    tests/domain/StoreSection_test.cpp
     tests/ui/MainFrame_test.cpp
     src/ui/MainFrame.cpp
+    src/domain/StoreSection.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>

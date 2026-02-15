@@ -2,6 +2,19 @@
 #include <cctype>
 #include <stdexcept>
 #include <string>
+#include <vector>
+
+std::string normalizePascal(const std::string &s) {
+  if (s.empty()) {
+    return s;
+  }
+  std::string result;
+  result += std::toupper(s[0]);
+  for (char c : s.substr(1)) {
+    result += std::tolower(c);
+  }
+  return result;
+}
 
 std::string toString(StoreSection ss) {
   switch (ss) {
@@ -20,24 +33,12 @@ std::string toString(StoreSection ss) {
   case StoreSection::Household:
     return "Household";
   default:
-    throw new std::invalid_argument("Invalid StoreSection Value");
+    throw std::invalid_argument("Invalid StoreSection Value");
   }
-}
-
-std::string normalizeStoreSectionString(const std::string &s) {
-  if (s.empty()) {
-    return s;
-  }
-  std::string result;
-  result += std::toupper(s[0]);
-  for (char c : s.substr(1)) {
-    result += std::tolower(c);
-  }
-  return result;
 }
 
 StoreSection fromString(const std::string &s) {
-  std::string ns = normalizeStoreSectionString(s);
+  std::string ns = normalizePascal(s);
   if (ns == "Produce") {
     return StoreSection::Produce;
   } else if (ns == "Dairy") {
@@ -55,4 +56,12 @@ StoreSection fromString(const std::string &s) {
   } else {
     throw std::invalid_argument("Invalid StoreSection Value");
   }
+}
+
+std::vector<StoreSection> getAllSections() {
+  return {
+      StoreSection::Produce,   StoreSection::Dairy,  StoreSection::Meat,
+      StoreSection::Frozen,    StoreSection::Bakery, StoreSection::Pantry,
+      StoreSection::Household,
+  };
 }
