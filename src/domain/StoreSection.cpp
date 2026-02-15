@@ -1,24 +1,58 @@
 #include "domain/StoreSection.h"
+#include <cctype>
 #include <stdexcept>
 #include <string>
 
 std::string toString(StoreSection ss) {
   switch (ss) {
   case StoreSection::Produce:
-    return "produce";
+    return "Produce";
   case StoreSection::Dairy:
-    return "dairy";
+    return "Dairy";
   case StoreSection::Meat:
-    return "meat";
+    return "Meat";
   case StoreSection::Frozen:
-    return "frozen";
+    return "Frozen";
   case StoreSection::Bakery:
-    return "bakery";
+    return "Bakery";
   case StoreSection::Pantry:
-    return "pantry";
+    return "Pantry";
   case StoreSection::Household:
-    return "household";
+    return "Household";
   default:
     throw new std::invalid_argument("Invalid StoreSection Value");
+  }
+}
+
+std::string normalizeStoreSectionString(const std::string &s) {
+  if (s.empty()) {
+    return s;
+  }
+  std::string result;
+  result += std::toupper(s[0]);
+  for (char c : s.substr(1)) {
+    result += std::tolower(c);
+  }
+  return result;
+}
+
+StoreSection fromString(const std::string &s) {
+  std::string ns = normalizeStoreSectionString(s);
+  if (ns == "Produce") {
+    return StoreSection::Produce;
+  } else if (ns == "Dairy") {
+    return StoreSection::Dairy;
+  } else if (ns == "Meat") {
+    return StoreSection::Meat;
+  } else if (ns == "Frozen") {
+    return StoreSection::Frozen;
+  } else if (ns == "Bakery") {
+    return StoreSection::Bakery;
+  } else if (ns == "Pantry") {
+    return StoreSection::Pantry;
+  } else if (ns == "Household") {
+    return StoreSection::Household;
+  } else {
+    throw std::invalid_argument("Invalid StoreSection Value");
   }
 }
