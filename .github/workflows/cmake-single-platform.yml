@@ -6,7 +6,7 @@ on:
     branches: ["master"]
 env:
   BUILD_TYPE: Release
-  WX_VERSION: "3.2.4" # Specify the version you want
+  WX_VERSION: "3.2.9" # Specify the version you want
 jobs:
   build:
     runs-on: ubuntu-latest
