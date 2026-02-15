@@ -45,7 +45,7 @@ jobs:
       - name: Configure CMake
         run: |
           export PATH=$HOME/wxWidgets/bin:$PATH
-          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DwxWidgets_CONFIG_EXECUTABLE=$HOME/wxWidgets/bin/wx-config
+          cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DwxWidgets_CONFIG_EXECUTABLE=$HOME/wxWidgets/bin/wx-config
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
