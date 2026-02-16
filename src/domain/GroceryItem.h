@@ -6,6 +6,8 @@
 
 class GroceryItem {
 public:
+  bool operator==(const GroceryItem &other) const;
+
   GroceryItem(const std::string &name, const std::string &quantity,
               StoreSection section);
 
