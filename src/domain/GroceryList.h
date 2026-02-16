@@ -2,6 +2,7 @@
 #define GROCERY_SHOPPING_LIST_DOMAIN_GROCERYLIST_H
 
 #include "domain/GroceryItem.h"
+#include <string>
 #include <vector>
 
 class GroceryList {
