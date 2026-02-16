@@ -9,6 +9,12 @@
 class GroceryList {
 public:
   GroceryList();
+
+  GroceryList(const GroceryList &) = delete;
+  GroceryList &operator=(const GroceryList &) = delete;
+  GroceryList(GroceryList &&) = delete;
+  GroceryList &operator=(const GroceryList &&) = delete;
+
   void addItem(const GroceryItem &item);
   const std::vector<GroceryItem> &getItems() const;
   std::vector<GroceryItem> getItemsBySection(const StoreSection section) const;

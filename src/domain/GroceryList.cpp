@@ -39,6 +39,9 @@ GroceryList::getItemsBySection(const StoreSection section) const {
 }
 
 void GroceryList::addObserver(IListObserver *observer) {
+  if (observer == nullptr) {
+    return;
+  }
   auto it = std::find(m_observers.begin(), m_observers.end(), observer);
   if (it == m_observers.end()) {
     m_observers.push_back(observer);
@@ -46,13 +49,19 @@ void GroceryList::addObserver(IListObserver *observer) {
 }
 
 void GroceryList::removeObserver(IListObserver *observer) {
+  if (observer == nullptr) {
+    return;
+  }
   m_observers.erase(
       std::remove(m_observers.begin(), m_observers.end(), observer),
       m_observers.end());
 }
 
 void GroceryList::notifyObservers() {
-  for (auto *observer : m_observers) {
-    observer->onListChanged();
+  auto observersCopy = m_observers;
+  for (auto *observer : observersCopy) {
+    if (observer) {
+      observer->onListChanged();
+    }
   }
 }
