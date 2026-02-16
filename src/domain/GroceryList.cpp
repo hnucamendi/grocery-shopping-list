@@ -1,6 +1,5 @@
 #include "domain/GroceryList.h"
-#include "domain/GroceryItem.h"
-#include "domain/StoreSection.h"
+#include <algorithm>
 #include <ctime>
 #include <iomanip>
 #include <sstream>
@@ -19,19 +18,41 @@ GroceryList::GroceryList()
 
 std::string GroceryList::getCreatedDate() const { return m_createdDate; }
 
-void GroceryList::addItem(const GroceryItem &item) { m_items.push_back(item); }
+void GroceryList::addItem(const GroceryItem &item) {
+  m_items.push_back(item);
+  notifyObservers();
+}
 
 const std::vector<GroceryItem> &GroceryList::getItems() const {
   return m_items;
 }
 
 std::vector<GroceryItem>
-GroceryList::getItemsBySection(const StoreSection &section) const {
+GroceryList::getItemsBySection(const StoreSection section) const {
   std::vector<GroceryItem> filteredVector;
-  for (std::size_t i = 0; i < m_items.size(); i++) {
-    if (m_items[i].getSection() == section) {
-      filteredVector.push_back(m_items[i]);
+  for (const auto &item : m_items) {
+    if (item.getSection() == section) {
+      filteredVector.push_back(item);
     }
   }
   return filteredVector;
+}
+
+void GroceryList::addObserver(IListObserver *observer) {
+  auto it = std::find(m_observers.begin(), m_observers.end(), observer);
+  if (it == m_observers.end()) {
+    m_observers.push_back(observer);
+  }
+}
+
+void GroceryList::removeObserver(IListObserver *observer) {
+  m_observers.erase(
+      std::remove(m_observers.begin(), m_observers.end(), observer),
+      m_observers.end());
+}
+
+void GroceryList::notifyObservers() {
+  for (auto *observer : m_observers) {
+    observer->onListChanged();
+  }
 }
