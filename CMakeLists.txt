@@ -34,6 +34,8 @@ add_executable(grocery-shopping-list
     src/ui/MainFrame.h
     src/domain/StoreSection.cpp
     src/domain/StoreSection.h
+    src/domain/GroceryItem.cpp
+    src/domain/GroceryItem.h
 )
 target_compile_options(grocery-shopping-list PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
@@ -53,9 +55,11 @@ target_link_libraries(grocery-shopping-list PRIVATE
 
 add_executable(grocery-shopping-list-tests
     tests/domain/StoreSection_test.cpp
+    tests/domain/GroceryItem_test.cpp
     tests/ui/MainFrame_test.cpp
     src/ui/MainFrame.cpp
     src/domain/StoreSection.cpp
+    src/domain/GroceryItem.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
