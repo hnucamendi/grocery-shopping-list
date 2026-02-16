@@ -13,8 +13,8 @@ public:
   const std::vector<GroceryItem> &getItems() const;
   std::vector<GroceryItem> getItemsBySection(const StoreSection section) const;
   std::string getCreatedDate() const;
-  void addObserver(IListObserver *);
-  void removeObserver(IListObserver *);
+  void addObserver(IListObserver *observer);
+  void removeObserver(IListObserver *observer);
 
 private:
   std::vector<IListObserver *> m_observers;
