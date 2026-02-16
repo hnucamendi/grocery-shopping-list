@@ -59,6 +59,7 @@ add_executable(grocery-shopping-list-tests
     tests/ui/MainFrame_test.cpp
     src/ui/MainFrame.cpp
     src/domain/StoreSection.cpp
+    src/domain/GroceryItem.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>
