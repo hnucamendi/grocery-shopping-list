@@ -30,8 +30,6 @@ GroceryList::getItemsBySection(const StoreSection &section) const {
   for (std::size_t i = 0; i < m_items.size(); i++) {
     if (m_items[i].getSection() == section) {
       filteredVector.push_back(m_items[i]);
-    } else {
-      continue;
     }
   }
   return filteredVector;
