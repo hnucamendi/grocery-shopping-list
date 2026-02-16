@@ -21,7 +21,9 @@ std::string GroceryList::getCreatedDate() const { return m_createdDate; }
 
 void GroceryList::addItem(const GroceryItem &item) { m_items.push_back(item); }
 
-std::vector<GroceryItem> GroceryList::getItems() const { return m_items; }
+const std::vector<GroceryItem> &GroceryList::getItems() const {
+  return m_items;
+}
 
 std::vector<GroceryItem>
 GroceryList::getItemsBySection(const StoreSection &section) const {

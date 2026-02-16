@@ -9,7 +9,7 @@ class GroceryList {
 public:
   GroceryList();
   void addItem(const GroceryItem &item);
-  std::vector<GroceryItem> getItems() const;
+  const std::vector<GroceryItem> &getItems() const;
   std::vector<GroceryItem> getItemsBySection(const StoreSection &section) const;
   std::string getCreatedDate() const;
 
