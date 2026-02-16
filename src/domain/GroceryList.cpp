@@ -15,8 +15,7 @@ std::string GroceryList::getCurrentDateString() {
 }
 
 GroceryList::GroceryList()
-    : m_items(std::vector<GroceryItem>{}),
-      m_createdDate(GroceryList::getCurrentDateString()) {}
+    : m_createdDate(GroceryList::getCurrentDateString()) {}
 
 std::string GroceryList::getCreatedDate() const { return m_createdDate; }
 
