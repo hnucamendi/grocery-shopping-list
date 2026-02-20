@@ -18,6 +18,10 @@ private:
   wxTextCtrl *m_quantityField;
   wxChoice *m_sectionField;
   wxButton *m_addButton;
+
+  static constexpr int PARENT_X = 20;
+  static constexpr int PARENT_Y = 20;
+  static constexpr int MULTIPLIER = 2;
 };
 
 #endif
