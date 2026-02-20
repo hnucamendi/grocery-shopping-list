@@ -8,6 +8,8 @@ MainFrame::MainFrame()
               wxSize(MainFrame::DEFAULT_WIDTH, MainFrame::DEFAULT_HEIGHT)) {
   SetMinSize(wxSize(MainFrame::DEFAULT_WIDTH, MainFrame::DEFAULT_HEIGHT));
 
+  SetInitialSize(wxSize(1200, 720));
+
   GroceryList *groceryList = new GroceryList();
   InputBar *inputBar = new InputBar(this, groceryList);
   inputBar->Show(true);
