@@ -10,7 +10,6 @@
 class InputBar : public wxPanel {
 public:
   InputBar(wxWindow *parent, GroceryList *groceryList);
-  void onAddClicked(wxCommandEvent &event);
 
 private:
   GroceryList *m_groceryList;
@@ -19,9 +18,10 @@ private:
   wxChoice *m_sectionField;
   wxButton *m_addButton;
 
-  static constexpr int PARENT_X = 20;
-  static constexpr int PARENT_Y = 20;
-  static constexpr int MULTIPLIER = 2;
+  void onAddClicked(wxCommandEvent &event);
+  void onNameTextUpdate(wxCommandEvent &event);
+  void onQuantityTextUpdate(wxCommandEvent &event);
+  void onUpdateAddButtonField();
 };
 
 #endif
