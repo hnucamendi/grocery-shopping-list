@@ -63,6 +63,7 @@ add_executable(grocery-shopping-list-tests
     tests/domain/GroceryItem_test.cpp
     tests/domain/GroceryList_test.cpp
     tests/ui/MainFrame_test.cpp
+    tests/ui/InputBar_test.cpp
     src/ui/MainFrame.cpp
     src/domain/StoreSection.cpp
     src/domain/GroceryItem.cpp

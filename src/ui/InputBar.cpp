@@ -7,7 +7,7 @@
 
 InputBar::InputBar(wxWindow *parent, GroceryList *groceryList)
     : wxPanel(parent), m_groceryList(groceryList) {
-  wxBoxSizer *sizer = new wxBoxSizer(wxHORIZONTAL);
+  auto *sizer = new wxBoxSizer(wxHORIZONTAL);
 
   m_nameField = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition,
                                wxDefaultSize, wxTE_PROCESS_ENTER);
@@ -16,7 +16,6 @@ InputBar::InputBar(wxWindow *parent, GroceryList *groceryList)
 
   m_quantityField = new wxTextCtrl(this, wxID_ANY, "", wxDefaultPosition,
                                    wxDefaultSize, wxTE_PROCESS_ENTER);
-  // wxSize(250, 20), wxTE_PROCESS_ENTER);
   m_quantityField->SetHint("Qty");
   m_quantityField->SetMinSize(wxSize(80, -1));
 
@@ -52,23 +51,23 @@ InputBar::InputBar(wxWindow *parent, GroceryList *groceryList)
   m_addButton->Bind(wxEVT_BUTTON, &InputBar::onAddClicked, this);
   m_nameField->Bind(wxEVT_TEXT_ENTER, &InputBar::onAddClicked, this);
   m_quantityField->Bind(wxEVT_TEXT_ENTER, &InputBar::onAddClicked, this);
+
   m_nameField->Bind(wxEVT_TEXT, &InputBar::onNameTextUpdate, this);
   m_quantityField->Bind(wxEVT_TEXT, &InputBar::onQuantityTextUpdate, this);
+  m_sectionField->Bind(wxEVT_CHOICE, &InputBar::onSectionSelectionUpdate, this);
 }
 
 void InputBar::onAddClicked(wxCommandEvent &event) {
-  wxString name = m_nameField->GetValue();
-  wxString quantity = m_quantityField->GetValue();
+  const wxString name = m_nameField->GetValue().Trim();
+  const wxString quantity = m_quantityField->GetValue().Trim();
+  const int sectionIndex = m_sectionField->GetSelection();
 
   if (name.IsEmpty()) {
     return;
   }
-
   if (quantity.IsEmpty()) {
-    quantity = "1";
+    return;
   }
-
-  int sectionIndex = m_sectionField->GetSelection();
   if (sectionIndex <= 0) {
     return;
   }
@@ -89,16 +88,22 @@ void InputBar::onAddClicked(wxCommandEvent &event) {
   m_nameField->SetFocus();
 }
 
-void InputBar::onUpdateAddButtonField() {
-  bool nameFieldValid = !m_nameField->GetValue().IsEmpty();
-  bool quantityFieldValid = !m_quantityField->GetValue().IsEmpty();
-  m_addButton->Enable(nameFieldValid && quantityFieldValid);
-}
-
 void InputBar::onNameTextUpdate(wxCommandEvent &event) {
-  onUpdateAddButtonField();
+  updateAddButtonState();
 }
 
 void InputBar::onQuantityTextUpdate(wxCommandEvent &event) {
-  onUpdateAddButtonField();
+  updateAddButtonState();
+}
+
+void InputBar::onSectionSelectionUpdate(wxCommandEvent &event) {
+  updateAddButtonState();
+}
+
+void InputBar::updateAddButtonState() {
+    const bool nameFieldValid = !m_nameField->GetValue().IsEmpty();
+    const bool quantityFieldValid = !m_quantityField->GetValue().IsEmpty();
+    const bool sectionFieldValid = m_sectionField->GetSelection() > 0;
+    m_addButton->Enable(nameFieldValid && quantityFieldValid &&
+                        sectionFieldValid);
 }
