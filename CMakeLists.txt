@@ -32,6 +32,8 @@ add_executable(grocery-shopping-list
     src/app/App.h
     src/ui/MainFrame.cpp
     src/ui/MainFrame.h
+    src/ui/InputBar.cpp
+    src/ui/InputBar.h
     src/domain/StoreSection.cpp
     src/domain/StoreSection.h
     src/domain/GroceryItem.cpp
@@ -61,10 +63,12 @@ add_executable(grocery-shopping-list-tests
     tests/domain/GroceryItem_test.cpp
     tests/domain/GroceryList_test.cpp
     tests/ui/MainFrame_test.cpp
+    tests/ui/InputBar_test.cpp
     src/ui/MainFrame.cpp
     src/domain/StoreSection.cpp
     src/domain/GroceryItem.cpp
     src/domain/GroceryList.cpp
+    src/ui/InputBar.cpp
 )
 target_compile_options(grocery-shopping-list-tests PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang,AppleClang>:-Wall -Wextra>

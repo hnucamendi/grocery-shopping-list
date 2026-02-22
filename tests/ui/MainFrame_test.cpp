@@ -5,7 +5,7 @@
 TEST_CASE("Test MainFrame attributes") {
     wxInitialize();
     {
-        MainFrame frame;
+        const MainFrame frame;
         REQUIRE(frame.GetTitle() == "Grocery Shopping List");
     }
     wxUninitialize();
